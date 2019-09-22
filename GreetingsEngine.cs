@@ -39,15 +39,29 @@ namespace ServerlessAuthenticationWithAzureActiveDirectory
             HttpRequest request,
             ILogger log)
         {
-            if (Thread.CurrentPrincipal.Identity.IsAuthenticated)
+            if (!Thread.CurrentPrincipal.Identity.IsAuthenticated)
             {
-                var claimsPrincipal = (ClaimsPrincipal)Thread.CurrentPrincipal;
-                var claims = claimsPrincipal.Claims.ToDictionary(c => c.Type, c => c.Value);
-                // Could use the claims here. For this sample, just return it!
-                return new OkObjectResult(claims);
+                return new UnauthorizedResult();
             }
 
-            return new UnauthorizedResult();
+            log.LogInformation("User authenticated");
+            var claimsPrincipal = (ClaimsPrincipal)Thread.CurrentPrincipal;
+            if (claimsPrincipal is null)
+            {
+                var message = "ClaimsPrincipal is null";
+                log.LogInformation(message);
+                return new OkObjectResult(message);
+            }
+            if (claimsPrincipal.Claims is null)
+            {
+                var message = "ClaimsPrincipal.Claims is null";
+                log.LogInformation(message);
+                return new OkObjectResult(message);
+            }
+
+            var claims = claimsPrincipal.Claims.ToDictionary(c => c.Type, c => c.Value);
+
+            return new OkObjectResult(claims);
         }
     }
 }
