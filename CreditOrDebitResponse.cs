@@ -1,8 +1,8 @@
 namespace ServerlessAuthenticationWithAzureActiveDirectory
 {
-    public class GreetingResponse
+    public class CreditOrDebitResponse
     {
-        public string Greeting { get; set; }
+        public decimal Amount { get; set; }
         public string AuthenticationType { get; set; }
     }
 }
