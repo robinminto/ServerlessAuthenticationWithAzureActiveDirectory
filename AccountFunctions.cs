@@ -19,7 +19,7 @@ namespace ServerlessAuthenticationWithAzureActiveDirectory
 
         [FunctionName("Balance")]
         public static async Task<IActionResult> Balance(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("Getting account balance.");
@@ -30,7 +30,7 @@ namespace ServerlessAuthenticationWithAzureActiveDirectory
 
         [FunctionName("Credit")]
         public static async Task<IActionResult> Credit(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("Crediting account.");
@@ -40,7 +40,7 @@ namespace ServerlessAuthenticationWithAzureActiveDirectory
 
         [FunctionName("Debit")]
         public static async Task<IActionResult> Debit(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("Debiting account.");
