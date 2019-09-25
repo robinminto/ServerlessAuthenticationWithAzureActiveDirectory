@@ -3,10 +3,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -25,7 +25,7 @@ namespace ServerlessAuthenticationWithAzureActiveDirectory
             log.LogInformation("Getting account balance.");
 
             return (ActionResult)new OkObjectResult(new BalanceResponse
-                    { Balance = _balance, AuthenticationType = AuthenticationType });
+                { Balance = _balance, AuthenticationType = AuthenticationType });
         }
 
         [FunctionName("Credit")]
